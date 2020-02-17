@@ -7,7 +7,6 @@ Official implementation of IJCV2019 paper: "Adaptive Importance Learning for Imp
   - numpy
   - tqdm
   - h5py
-  - Python 2.7
 
 ### Training
 ```
