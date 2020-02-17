@@ -56,9 +56,9 @@ We use PIL for image convertion, for best PSNR performance and SSIM, please use 
 ### Prepare Training dataset
   - We provide a simple hdf5 format training sample in data folder with 'data' and 'label' keys, the training data is generated with Matlab Bicubic Interplotation, please refer [Code for Data Generation](https://github.com/twtygqyy/pytorch-vdsr/tree/master/data) for creating training files. Then, put the generated .h5 file into './data/' folder and change the training data path in the training code accordingly.
 ### Run steps
- 1. Train the teacher vdsr model (e.g., 64 feature maps per layer) with 'main_tea.py' in the traiditional learning way
- 2. Pre-train the lightweight vdsr model (e.g., 13 feature maps per layer) with 'main_pre.py' in the traiditional learning way
- 3. Train the lightweight vdsr model (e.g., 13 feature maps per layer) with 'main_ail.py' in the proposed AIL learning way
+ 1. Train the teacher [VDSR](https://cv.snu.ac.kr/research/VDSR/) model (e.g., 64 feature maps per layer) with 'main_tea.py' in the traiditional learning way
+ 2. Pre-train the lightweight [VDSR](https://cv.snu.ac.kr/research/VDSR/) model (e.g., 13 feature maps per layer) with 'main_pre.py' in the traiditional learning way
+ 3. Train the lightweight [VDSR](https://cv.snu.ac.kr/research/VDSR/) model (e.g., 13 feature maps per layer) with 'main_ail.py' in the proposed AIL learning way
 ### Performance
   - Following [VDSR](https://cv.snu.ac.kr/research/VDSR/), we train the teacher model and pretrain the lightweight model on the training pairs from all scales, e.g., 2,3,4
   - According to the eay-to-hard learning strategy, we train a separate model for each scale using the proposed AIL learning scheme.
