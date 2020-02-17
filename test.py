@@ -18,7 +18,7 @@ parser.add_argument('--premodel', default='model/pre_vdsr_f13.pth', type=str, he
 parser.add_argument('--tea', default='model/tea_vdsr.pth', type=str, help='path to teacher model')
 parser.add_argument("--fpath", default='./', type=str, help="path to the test dataset")
 parser.add_argument("--dataset", default="Set5", type=str, help="test set name")
-parser.add_argument("--image", default="butterfly_GT", type=str, help="image name")
+parser.add_argument("--image", default="woman", type=str, help="image name")
 parser.add_argument("--scale", type=int, default=2, help="SR scales, e.g., 2,3,4")
 
 
@@ -44,9 +44,9 @@ def colorize(y, ycbcr):
 
 def SRImage(fpath, setname, imgName, model, scale, mname):
 
-    im_gt_ycbcr = scipy.io.loadmat(fpath + setname + '/' + str(scale) + "/GT/" + imgName + ".mat")
+    im_gt_ycbcr = scipy.io.loadmat(fpath + setname + '/' + str(scale) + "/" + imgName + "_GT.mat")
     im_gt_ycbcr = im_gt_ycbcr['im_gt_ycbcr']
-    im_b_ycbcr = scipy.io.loadmat(fpath + setname + '/' + str(scale) + "/" + imgName + "_scale.mat")
+    im_b_ycbcr = scipy.io.loadmat(fpath + setname + '/' + str(scale) + "/" + imgName + "_x" + str(scale) + ".mat")
     im_b_ycbcr = im_b_ycbcr['im_b_ycbcr']
 
     im_gt_ycbcr = im_gt_ycbcr * 255.0
@@ -84,13 +84,13 @@ def SRImage(fpath, setname, imgName, model, scale, mname):
         os.makedirs(save_path)
 
     save_name = imgName + '_' + mname + '_' + str(scale)
-    save_name_gt = imgName + '_gt_' + str(scale)
-    save_name_bicubic = imgName + '_bicubic_' + str(scale)
-
     im_h.save(os.path.join(save_path, save_name + '.png'))
-    if mname == 'AIL':
-        im_gt.save(os.path.join(save_path, save_name_gt + '.png'))
-        im_b.save(os.path.join(save_path, save_name_bicubic + '.png'))
+
+    ## save gt and bicubic input
+    # save_name_gt = imgName + '_gt_' + str(scale)
+    # save_name_bicubic = imgName + '_bicubic_' + str(scale)
+    # im_gt.save(os.path.join(save_path, save_name_gt + '.png'))
+    # im_b.save(os.path.join(save_path, save_name_bicubic + '.png'))
 
     # save the brightness channel of the SR result
     scipy.io.savemat(os.path.join(save_path, save_name + '_sr.mat'), {'img': im_h_y[0, :, :]})
@@ -110,4 +110,3 @@ print('SR result of the image \'{}\' from \'{}\':'.format(opt.image, opt.dataset
 SRImage(opt.fpath, opt.dataset, opt.image, pre_model, opt.scale, 'Lightweight model')
 SRImage(opt.fpath, opt.dataset, opt.image, model, opt.scale, 'AIL + lightweight model')
 SRImage(opt.fpath, opt.dataset, opt.image, tea_model, opt.scale, 'Teacher')
-
