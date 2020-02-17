@@ -49,7 +49,7 @@ optional arguments:
   --tea                 Model path. Default='model/model/tea_vdsr.pth'
   --fpath               Path to the test dataset. Default="./"
   --dataset             Test set name. Default="Set5"
-  --image               Image name. Default="woman_GT"
+  --image               Image name. Default="woman"
   --scale               Scale factor, Default: 2
 ```
 We use PIL for image convertion, for best PSNR performance and SSIM, please use Matlab
