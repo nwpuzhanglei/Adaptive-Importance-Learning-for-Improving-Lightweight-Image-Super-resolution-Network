@@ -55,7 +55,7 @@ optional arguments:
 We use PIL for image convertion, for best PSNR performance and SSIM, please use Matlab
 
 ### Prepare Training dataset
-  - We provide a simple hdf5 format training sample in data folder with 'data' and 'label' keys, the training data is generated with Matlab Bicubic Interplotation, please refer [Code for Data Generation](https://github.com/twtygqyy/pytorch-vdsr/tree/master/data) for creating training files.
+  - We provide a simple hdf5 format training sample in data folder with 'data' and 'label' keys, the training data is generated with Matlab Bicubic Interplotation, please refer [Code for Data Generation](https://github.com/twtygqyy/pytorch-vdsr/tree/master/data) for creating training files. Then, put the generated .h5 file into './data/' folder and change the training data path in the training code accordingly.
 ### Run steps
  1. Train the teacher vdsr model (e.g., 64 feature maps per layer) with 'main_tea.py' in the traiditional learning way
  2. Pre-train the lightweight vdsr model (e.g., 13 feature maps per layer) with 'main_pre.py' in the traiditional learning way
@@ -66,6 +66,7 @@ We use PIL for image convertion, for best PSNR performance and SSIM, please use 
   - The proposed AIL learning scheme can utilized to train a model from scratch without pre-training learning. With VDSR network, pre-training makes the training process more stable. While for the more complex [EDSR](https://github.com/thstkdgus35/EDSR-PyTorch), pre-traning does not make difference.
   - The proposed AIL performs better with a much more lightweight network baseline.
   - In this implementation, we obtain the lightweight network by slimming the baseline network, i.e., reducing the number of feature maps per layer.
+  - We provide trained modes in folder './model/', where 'tea_vdsr.pth' is the teacher VDSR model, 'pre_vdsr_f13.pth' is the lightweight VDSR model and 'ours_ail_r9_f13_sx.pth' is the model trained by the proposed AIL leanring scheme at SR scale x.
   - No bias is used in this implementation
   
  ### Reference
