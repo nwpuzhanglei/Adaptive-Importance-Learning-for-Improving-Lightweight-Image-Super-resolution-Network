@@ -1,4 +1,4 @@
-# PyTorch VDSR
+# PyTorch for Adaptive Importance Learning (AIL)
 Official implementation of IJCV2019 paper: "Adaptive Importance Learning for Improving Lightweight Image Super-resolution Network" in PyTorch
 
 ## Dependencies
